@@ -1,0 +1,15 @@
+function y = mov_avg_noncausual_m(x, M)
+
+[rows, colums] = size(x);
+
+x = [zeros(rows,(M-1)/2), x(:,(M-1)/2 + 1:colums - (M-1)/2)];
+y = zeros(1,colums);
+
+for n = colums - (M-1)/2 * 2 : -1 : (M-1)/2 + 1
+    sum = 0;
+    for k = -(M-1)/2 : (M-1)/2
+        sum = sum + x(n - k);
+    end
+    y(n) = sum/M;
+end
+
